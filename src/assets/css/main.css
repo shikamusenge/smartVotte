@@ -1,0 +1,126 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body,
+html {
+  background-color: hsl(0, 0%, 94%);
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-bottom: solid 2px rgb(4, 138, 24);
+}
+nav ul {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  gap: 0.3rem;
+  justify-content: end;
+}
+nav .brand {
+  font-weight: bolder;
+}
+nav ul a {
+  text-decoration: none;
+  color: rgb(6, 67, 28);
+  padding: 0.5rem 1rem;
+}
+nav ul .active {
+  text-decoration: underline;
+}
+.main-section {
+  margin: 2rem;
+}
+.btn {
+  box-shadow: 1px 1px gray;
+  padding-inline: 0.3rem;
+  margin: 0.4rem;
+  cursor: pointer;
+  border-radius: 4px;
+  text-decoration: none;
+  color: black;
+  padding-block: 0.12rem;
+}
+.paths {
+  color: blue;
+}
+.paths a {
+  color: blue;
+}
+.sub_header {
+  display: flex;
+  justify-items: center;
+  justify-content: space-between;
+}
+
+table {
+  width: 100%;
+}
+tr,
+td,
+th {
+  width: fit-content;
+  height: fit-content;
+  padding: 0.3rem;
+}
+.container-centered {
+  display: flex;
+  justify-content: center;
+}
+.form-container {
+  background-color: white;
+  padding: 1rem;
+}
+.form-input {
+  display: grid;
+  padding-block: 0.2rem;
+}
+.post-form {
+  width: 500px;
+}
+.form-input input {
+  padding: 0.2rem;
+  outline-color: green;
+}
+.post-form textarea {
+  height: 4rem;
+  padding: 0.2rem;
+  outline-color: green;
+}
+.form-input button {
+  min-width: 100%;
+  outline: none;
+  border: none;
+  background: rgb(2, 66, 24);
+  color: white;
+  padding: 0.3rem;
+  margin: 0;
+  cursor: pointer;
+}
+.candidate-card {
+  display: flex;
+  background-color: white;
+  width: 400px;
+  border-radius: 5px;
+}
+#candidate-container {
+  display: flex;
+}
+
+.candidate-card .image {
+  max-width: 40%;
+  overflow: hidden;
+}
+.candidate-card .image img {
+  max-width: 170px;
+  width: 150px;
+  overflow: hidden;
+}
+.sub_header {
+  display: flex;
+  justify-items: center;
+  justify-content: space-between;
+}
