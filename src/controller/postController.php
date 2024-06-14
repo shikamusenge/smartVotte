@@ -96,7 +96,7 @@ class PostController extends Database{
    public function getActivePosts(){
     try{
       $conn = $this->getConnection();
-        $stmt = $conn->prepare("SELECT post_id id,title FROM posts WHERE status='onhold'") or die("failled to load data");
+        $stmt = $conn->prepare("SELECT post_id,title FROM posts WHERE status='onhold'") or die("failled to load data");
         $stmt->execute();
         $result=$stmt->fetchAll();
         if(!$result){

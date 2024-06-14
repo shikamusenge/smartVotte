@@ -81,7 +81,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <option value="" selected disabled>Choose Post</option>
         <?php
          foreach($activeposts as $post){
-            echo "<option value='".$post['post_id']."'>".$post['title']."</option>";
+            $id=$post['post_id'];
+            echo "<option value='$id'>".$post['title']."</option>";
          }
         ?>
     </select>

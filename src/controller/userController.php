@@ -28,7 +28,7 @@ class User extends Database
                 return ["isLogged" => false, "message" => "Failed to log in. Incorrect password."];
             }
 
-            return ["isLogged" => true, "message" => "Logged in successfully","role"=>$result['post'],"user_id"=>$result['user_id'],"account_id"=>$result['account_Id']];
+            return ["isLogged" => true,"status"=>$result['status'], "message" => "Logged in successfully","role"=>$result['post'],"user_id"=>$result['user_id'],"account_id"=>$result['account_Id']];
         } catch (PDOException $e) {
             error_log($e->getMessage());
             return ["isLogged" => false, "message" => "An unexpected error occurred."];

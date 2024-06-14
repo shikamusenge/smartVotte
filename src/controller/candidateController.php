@@ -144,6 +144,18 @@ class CandidateController extends Database {
             throw $th;
         }
     }
-    //
+    //get total candidate
+
+    public function getTotalCandidate(){
+           try {
+            $conn = $this->getConnection();
+            $stmt = $conn->prepare("SELECT count(*) total_candidate FROM candidate ") or die("failed to load data");
+            $stmt->execute();
+            $result = $stmt->fetch();
+            return $result['total_candidate'];
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
 }
 ?>

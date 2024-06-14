@@ -26,31 +26,48 @@ class VoterController extends Database{
      
     }
 // get all votters 
-    public function getAllVotters() {
-       try {
+  public function getAllVotters($limit = 10, $offset = 0)
+{
+    try {
         $conn = $this->getConnection();
-        $stmt = $conn->prepare("SELECT * FROM votter") or die("failled to load data");
+        $stmt = $conn->prepare("SELECT * FROM votter LIMIT :limit OFFSET :offset");
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
-        $result=$stmt->fetchAll();
-        if(!$result){
-            return [];
-        }
-        return $result;
-       } catch (\Throwable $th) {
-        //throw $th;
-       }
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result ?: [];
+    } catch (PDOException $e) {
+        // Log the error or perform some other error handling mechanism
+        // For example:
+        error_log("Error retrieving voters: " . $e->getMessage());
+        return []; // return an empty array to avoid exposing the error to the caller
     }
+}
 
+public function getTotalVotters() {
+try {
+        $conn = $this->getConnection();
+        $stmt = $conn->prepare("SELECT COUNT(*) AS total_voters FROM votter");
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return (int) $result['total_voters'];
+    } catch (PDOException $e) {
+        error_log("Error retrieving voters: " . $e->getMessage());
+    }
+}
     /// approve votter
     public function approveVotter($id) {
        try {
         $conn = $this->getConnection();
         $stmt = $conn->prepare("UPDATE votter SET status='approved' WHERE votter_id=:id") or die("failled to load data");
+        $stmt2 = $conn->prepare("UPDATE users SET status=1 WHERE account_id=:id") or die("failled to load data");
         $stmt->bindParam(':id',$id);
+        $stmt2->bindParam(':id',$id);
         $stmt->execute();
+        $stmt2->execute();
         return true;
        } catch (\Throwable $th) {
-        //throw $th;
+        throw $th;
        }
     }
     /// reject votter
@@ -80,11 +97,11 @@ class VoterController extends Database{
        }
     }
 
-    public function getPostsDetails($votterId) {
+    public function getPostsDetails($votter) {
        try {
         $conn = $this->getConnection();
-        $stmt = $conn->prepare("SELECT title,posts.post_id postId, Description,posts.status post_status,COUNT(post_id) total_candidate FROM `posts` INNER JOIN candidate WHERE posts.post_id NOT IN (SELECT post FROM vottes WHERE votter = :votterId) AND candidate.post=posts.post_id GROUP BY candidate.post;") or die("failled to load data");
-        $stmt->bindParam(":votterId",$votterId);
+        $stmt = $conn->prepare("SELECT title,posts.post_id postId, Description,posts.status post_status,COUNT(post_id) total_candidate FROM `posts` INNER JOIN candidate WHERE posts.post_id NOT IN (SELECT post FROM vottes WHERE votter = :votterId) AND candidate.post=posts.post_id GROUP BY candidate.post") or die("failled to load data");
+        $stmt->bindParam(":votterId",$votter);
         $stmt->execute();
         $result=$stmt->fetchAll();
         if(!$result){
@@ -95,7 +112,6 @@ class VoterController extends Database{
         throw $th;
        }
     }
-
    public function getPostsCandidates($post){
     try {
         $conn = $this->getConnection();
@@ -126,7 +142,7 @@ class VoterController extends Database{
         }
    }
    //delete
-   public   function deleteVotter($id) {
+public   function deleteVotter($id) {
     $conn = $this->getConnection();
   $stmt = $conn->prepare("DELETE FROM votter WHERE votter_id=?");
  $stmt2=$conn->prepare('DELETE FROM users WHERE account_id=?') or die('');
@@ -153,6 +169,7 @@ class VoterController extends Database{
             $data['votter_id'],
         ]);
    }
+
 
 }
 ?>

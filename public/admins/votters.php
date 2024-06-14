@@ -13,7 +13,13 @@ $navs=[["text"=>"Dashboard","href"=>"dashboard.php"],
 $navBar =  renderHeader($title, $page, $user, $navs);
 echo $navBar;
 $VotterCtl = new VoterController();
-$votters = $VotterCtl->getAllVotters();
+
+// pagination variables
+$limit = 5; // number of records per page
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$offset = ($page - 1) * $limit;
+
+$votters = $VotterCtl->getAllVotters($limit, $offset);
 
 if(isset($_GET['action'])){
     $id=$_GET['id'];
@@ -78,4 +84,15 @@ if(isset($_GET['action'])){
 </tr>
     <?php }?>
 </table>
+
+<!-- pagination links -->
+<nav aria-label="Pagination">
+  <ul class="pagination">
+    <?php 
+    for($i=1; $i<=ceil($VotterCtl->getTotalVotters() / $limit); $i++): ?>
+    <li class="page-item <?= $i == $page ? 'active' : '' ?>"><a class="page-link" href="votters.php?page=<?= $i ?>"><?= $i ?></a></li>
+    <?php endfor; ?>
+  </ul>
+</nav>
+
 </section>

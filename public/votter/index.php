@@ -1,7 +1,6 @@
 <?php
 include_once "../../src/layout/header.php";
 $votter=$_SESSION['account_id'];
-echo 
 include_once "../../src/controller/VoterController.php";
 $postCtl = new VoterController();
 $posts = $postCtl->getPostsDetails($votter);

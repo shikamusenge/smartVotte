@@ -1,5 +1,7 @@
 <?php
-include_once "../../src/layout/header.php";
+define('BASE_DIR', __DIR__ . '/../../src/');
+include_once BASE_DIR . 'layout/header.php';
+// include_once "../../src/layout/header.php";
 include_once "../../src/controller/CandidateController.php";
 $title = "Candidates";
 $page = "candidates";
@@ -31,9 +33,16 @@ if (isset($_GET['action'])) {
     }
 }
 
+
+// pagination variables
+$limit = 4; // number of records per page
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$offset = ($page - 1) * $limit;
+$candidates = $CandidateCtl->getAllCandidates($limit, $offset); 
+$totalCandidate=$CandidateCtl->getTotalCandidate();
 ?>
 
-<section class='main-section'>
+<section class='main-section dat-section'>
     <div class='sub_header'>
      <h3 style='margin-bottom:0.5rem'>Candidates</h3>
     <div class="div"><a href="./candidate_register.php" class="btn">Add Candidate</a></div>   
@@ -72,6 +81,15 @@ if (isset($_GET['action'])) {
         </tr>
         <?php } ?>
     </table>
+    <div class="pagnation">
+     <?php
+for($i=1;$i<=ceil($totalCandidate/$limit);$i++){
+  echo "<a href='candidate.php?page=".$i."' class='btn'>".$i.'</a>';
+}
+?>   
+    </div>
+
+
 </section>
 <style>
 .sub_header {
@@ -82,5 +100,13 @@ if (isset($_GET['action'])) {
 .sub_header .btn{
     background-color: green;
     color: white;
+}
+.pagination{
+ position: absolute; 
+bottom: 0;
+}
+.data-section{
+    min-height:90vh;
+    background-color:black;
 }
 </style>

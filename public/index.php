@@ -13,7 +13,7 @@ if($_POST){
 $client=new User();
 $user=["email"=>$_POST['email'],"password"=>$_POST['password']];
 $loginRequest=$client->login($user);
-if($loginRequest['isLogged']){
+if($loginRequest['isLogged'] && $loginRequest['status']==1||$loginRequest['isLogged']&&$loginRequest['role']=='admin'){
     $_SESSION['user_id']=$loginRequest['user_id'];
     $_SESSION['USER_ROLE']=$loginRequest['role'];
     $_SESSION['account_id']=$loginRequest['account_id'];
@@ -23,6 +23,9 @@ if($loginRequest['isLogged']){
     if($loginRequest['role']=='votter'){
     echo "<script>alert('user signed in'); location.href='./votter/'</script>";}
        }
+if($loginRequest['isLogged']&&$loginRequest['status']==0){
+    echo "<script>alert('Acount waiting for admin approval'); location.href='./approvapage.php'</script>";
+}
 else{
     echo "<script>alert('".$loginRequest['message']."')</script>";
 }
