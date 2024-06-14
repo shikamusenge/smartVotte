@@ -14,11 +14,13 @@ nav {
   border-bottom: solid 2px rgb(4, 138, 24);
 }
 nav ul {
-  display: flex;
   list-style: none;
-  align-items: center;
-  gap: 0.3rem;
-  justify-content: end;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+nav ul li {
+  margin-left: 2rem;
 }
 nav .brand {
   font-weight: bolder;
@@ -73,6 +75,7 @@ th {
 .form-container {
   background-color: white;
   padding: 1rem;
+  box-shadow: 1px 1px rgba(83, 101, 83, 0.345);
 }
 .form-input {
   display: grid;

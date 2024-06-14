@@ -67,19 +67,16 @@ class VoterController extends Database{
     }
 
     // get single votter
-    public function getVotter($nid) {
+    public function getSingleVoter($id) {
        try {
         $conn = $this->getConnection();
-        $stmt = $conn->prepare("SELECT * FROM votter WHERE nid=:nid") or die("failled to load data");
-        $stmt->bindParam(':nid',$nid);
+        $stmt = $conn->prepare("SELECT * FROM votter WHERE votter_id=:id") or die("failled to load data");
+        $stmt->bindParam(':id',$id);
         $stmt->execute();
         $result=$stmt->fetch();
-        if(!$result){
-            return [];
-        }
         return $result;
        } catch (\Throwable $th) {
-        //throw $th;
+        throw $th;
        }
     }
 
@@ -128,5 +125,34 @@ class VoterController extends Database{
             throw $th;
         }
    }
+   //delete
+   public   function deleteVotter($id) {
+    $conn = $this->getConnection();
+  $stmt = $conn->prepare("DELETE FROM votter WHERE votter_id=?");
+ $stmt2=$conn->prepare('DELETE FROM users WHERE account_id=?') or die('');
+ $stmt2->execute([$id]);
+        return $stmt->execute([$id]);
+   }
+   // update 
+ public   function updateVoter(array $data) {
+    $conn = $this->getConnection();
+     $stmt = $conn->prepare("
+            UPDATE votter SET 
+                first_name = ?, 
+                last_name = ?, 
+                dob = ?, 
+                nid = ?, 
+                phoneNumber = ? 
+                WHERE votter_id=?");
+        return $stmt->execute([
+            $data['first_name'],
+            $data['last_name'],
+            $data['dob'],
+            $data['nid'],
+            $data['phoneNumber'],
+            $data['votter_id'],
+        ]);
+   }
+
 }
 ?>

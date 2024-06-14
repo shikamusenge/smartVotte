@@ -1,7 +1,7 @@
 <?php
 class Database {
     private $host = 'localhost';
-    private $db_name = 'voting_db';
+    private $db_name = 'smart_votte';
     private $username = 'root';
     private $password = '';
     public $conn;

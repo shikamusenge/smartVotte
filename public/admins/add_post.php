@@ -9,7 +9,7 @@ $user="admin";
 $navs=[["text"=>"Dashboard","href"=>"dashboard.php"],
 ["text"=>"Candidates","href"=>"candidate.php"],
 ["text"=>"Posts","href"=>"posts.php"],
-["text"=>"Reports","href"=>"reports.php"],
+["text"=>"Reports","href"=>"report.php"],
 ["text"=>"votters","href"=>"votters.php"],
 
 ];

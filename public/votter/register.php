@@ -1,6 +1,6 @@
 <?php
 // Include necessary files
-require_once '../../src/layout/header.php';
+session_start();
 require_once '../../src/controller/VoterController.php';
 require_once '../../src/controller/UserController.php';
 require_once '../../src/utils/Validator.php';
@@ -32,30 +32,32 @@ if($User->register($userInfo)){
 }
 }
 
-// Set the page title and navigation
-$title = "Vote ";
-$page = "Home";
-$user = "votter";
-$navs = [
-    ["text" => "Home", "href" => "index.php"],
-    ["text" => "Vote", "href" => "vote.php"]
-];
-
-// Render the header
-$navBar = renderHeader($title, $page, $user, $navs);
-echo $navBar;
-
 // Render the main section
 ?>
-<section class='main-section'>
-    <div class="form-container">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../src/assets/css/main.css">
+</head>
+<body>
+    
+
+<section class='main-section container-centered'>
+    <div class="form-container" style="width:400px; max-width:90vw">
         <form method="post">
         <!-- Render the voter registration form here -->
         <?php include_once '../../src/layout/votterRegistrerForm.php'; ?>
         <?php include_once '../../src/layout/userForm.php'; ?>
-    </div>
-    <div class="form-input">
+         <div class="form-input">
         <button type="submit" name="save_votter">Signup</button>
     </div>
+    </div>
 </form>
+</div>
 </section>
+</body>
+</html>

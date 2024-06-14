@@ -1,13 +1,13 @@
 <?php
 include_once "../../src/layout/header.php";
 include_once "../../src/controller/postController.php";
-$title="Votters";
-$page="votters";
-$user="votter";
+$title="Posts";
+$page="Posts";
+$user="admin";
 $navs=[["text"=>"Dashboard","href"=>"dashboard.php"],
 ["text"=>"Candidates","href"=>"candidate.php"],
 ["text"=>"Posts","href"=>"posts.php"],
-["text"=>"Reports","href"=>"reports.php"],
+["text"=>"Reports","href"=>"report.php"],
 ["text"=>"votters","href"=>"votters.php"],
 
 ];
@@ -34,7 +34,10 @@ if(isset($_GET['action'])){
 ?>
 
 <section class='main-section'>
- <h3 style='margin-bottom:0.5rem'>/Posts</h3>
+ <div class='sub_header'>
+     <h3 style='margin-bottom:0.5rem'>/Posts</h3>
+    <div class="div"><a href="./add_post.php" class="btn">Add New Post</a></div>   
+    </div>
  <table border='1'>
     <tr>
         <th>No</th>

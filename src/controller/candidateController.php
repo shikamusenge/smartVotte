@@ -28,6 +28,33 @@ class CandidateController extends Database {
             throw $th;
         }
     }
+        //update candidate
+
+    public function updateCandidate($id,array $candidate) {
+        try {
+            $conn = $this->getConnection();
+            $fname = $candidate['fname'];
+            $lname = $candidate['lname'];
+            $dob = $candidate['dob'];
+            $nid = $candidate['nid'];
+            $party = $candidate['party'];
+            $post = $candidate['post'];
+            $cid = $id;
+            $sql = "UPDATE `candidate` SET `first_name`= :fname,`last_name`= :lname, `dob` = :dob, `nid`=:nid, `party`=:party, `post`=:post WHERE candidate_id=:cid";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':fname', $fname);
+            $stmt->bindParam(':lname', $lname);
+            $stmt->bindParam(':dob', $dob);
+            $stmt->bindParam(':nid', $nid);
+            $stmt->bindParam(':party', $party);
+            $stmt->bindParam(':post', $post);
+            $stmt->bindParam(':cid', $cid, PDO::PARAM_INT);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $th) {
+            throw $th;
+        }
+    }
 
     // Get all candidates with pagination
     public function getAllCandidates($limit, $offset) {
@@ -93,20 +120,30 @@ class CandidateController extends Database {
     }
 
     // Get single candidate
-    public function getCandidate($nid) {
+    public function getCandidate($id) {
         try {
             $conn = $this->getConnection();
-            $stmt = $conn->prepare("SELECT * FROM candidate WHERE nid=:nid") or die("failed to load data");
-            $stmt->bindParam(':nid', $nid);
+            $stmt = $conn->prepare("SELECT * FROM candidate WHERE candidate_id=:id") or die("failed to load data");
+            $stmt->bindParam(':id', $id);
             $stmt->execute();
             $result = $stmt->fetch();
-            if (!$result) {
-                return [];
-            }
             return $result;
         } catch (\Throwable $th) {
             throw $th;
         }
     }
+    // DELETE Candidate
+    public function deleteCandidate($id) {
+        try {
+            $conn = $this->getConnection();
+            $stmt = $conn->prepare('DELETE FROM candidate WHERE candidate_id=:id') or die('');
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            return true;
+        }catch(PDOException $th){
+            throw $th;
+        }
+    }
+    //
 }
 ?>

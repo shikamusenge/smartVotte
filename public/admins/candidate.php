@@ -3,12 +3,12 @@ include_once "../../src/layout/header.php";
 include_once "../../src/controller/CandidateController.php";
 $title = "Candidates";
 $page = "candidates";
-$user = "candidate";
+$user = "admin";
 $navs = [
     ["text" => "Dashboard", "href" => "dashboard.php"],
-    ["text" => "Candidates", "href" => "candidates.php"],
+    ["text" => "Candidates", "href" => "candidate.php"],
     ["text" => "Posts", "href" => "posts.php"],
-    ["text" => "Reports", "href" => "reports.php"],
+    ["text" => "Reports", "href" => "report.php"],
     ["text" => "Voters", "href" => "voters.php"],
 ];
 
@@ -18,15 +18,15 @@ $CandidateCtl = new CandidateController();
 $candidates = $CandidateCtl->getAllCandidates(10, 0); // Example with limit 10 and offset 0
 
 if (isset($_GET['action'])) {
-    $id = $_GET['id'];
-    if ($_GET['action'] == 'approve') {
-        if ($CandidateCtl->approveCandidate($id)) {
-            echo "<script>alert('Candidate approved'); location.href='candidates.php'</script>";
+    $id = $_GET['cid'];
+    if ($_GET['action'] == 'delete') {
+        if ($CandidateCtl->deleteCandidate($id)) {
+            echo "<script>alert('Candidate deleted'); location.href='candidate.php'</script>";
         }
     }
     if ($_GET['action'] == 'reject') {
         if ($CandidateCtl->rejectCandidate($id)) {
-            echo "<script>alert('Candidate rejected!'); location.href='candidates.php'</script>";
+            echo "<script>alert('Candidate rejected!'); location.href='candidate.php'</script>";
         }
     }
 }
@@ -48,7 +48,6 @@ if (isset($_GET['action'])) {
             <th>National Identity Card</th>
             <th>Party</th>
             <th>Post</th>
-            <th>Status</th>
             <th colspan='2'>Action</th>
         </tr>
         <?php
@@ -66,12 +65,10 @@ if (isset($_GET['action'])) {
             <td><?=$candidate['party']?></td>
             <td><?=$candidate['post']?></td>
             <td><?=$candidate['status']?></td>
-            <?php if ($candidate['status'] == 'waiting') { ?>
             <td> 
-                <a href="candidates.php?action=approve&id=<?=$id?>" class='btn btn-approve'>Approve</a>
-                <a href="candidates.php?action=reject&id=<?=$id?>" class='btn btn-reject'>Reject</a>
+                <a href="update_candidate.php?cid=<?=$id?>" class='btn btn-approve'>UPDATE</a>
+                <a href="candidate.php?action=delete&cid=<?=$id?>" class='btn btn-reject'>DELETE</a>
             </td>
-            <?php } ?>
         </tr>
         <?php } ?>
     </table>

@@ -1,7 +1,7 @@
 <?php
-session_start();
-$votter=$_SESSION['account_id'];
 include_once "../../src/layout/header.php";
+$votter=$_SESSION['account_id'];
+echo 
 include_once "../../src/controller/VoterController.php";
 $postCtl = new VoterController();
 $posts = $postCtl->getPostsDetails($votter);
@@ -27,7 +27,7 @@ echo $navBar;
  <?php
  $no=0;
  if(count($posts)==0){
-    echo "<tr><td colspan='7' style='text-align:center;padding:2rem;'>No post added Click <a href='add_post.php' class='btn'> here </a> to add new</td></tr>";
+    echo "<tr><td colspan='7' style='text-align:center;padding:2rem;'>No post Which is ready If Avilable will be desiplayede here</tr>";
  }
  foreach($posts as $post){
     $no++;

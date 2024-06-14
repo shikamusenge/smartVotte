@@ -3,14 +3,12 @@ include_once "../../src/layout/header.php";
 include_once "../../src/controller/VoterController.php";
 $title="Votters";
 $page="votters";
-$user="votter";
+$user="admin";
 $navs=[["text"=>"Dashboard","href"=>"dashboard.php"],
 ["text"=>"Candidates","href"=>"candidate.php"],
 ["text"=>"Posts","href"=>"posts.php"],
-["text"=>"Reports","href"=>"reports.php"],
-["text"=>"votters","href"=>"votters.php"],
-
-];
+["text"=>"Reports","href"=>"report.php"],
+["text"=>"Voters","href"=>"votters.php"],];
 
 $navBar =  renderHeader($title, $page, $user, $navs);
 echo $navBar;
@@ -29,6 +27,11 @@ if(isset($_GET['action'])){
         echo"<script>alert('votter rejected!'); location.href='votters.php'</script>";
        } 
     }
+        
+    if($_GET['action']=='delete'){
+       if($VotterCtl->deleteVotter($id)){
+        echo"<script>alert('votter deleted!'); location.href='votters.php'</script>";
+       }}
 }
 
 ?>
@@ -58,14 +61,20 @@ if(isset($_GET['action'])){
 <td><?=$votter['nid']?></td>
 <td><?=$votter['status']?></td>
 <td><?=$votter['phoneNumber']?></td>
-<?php if($votter['status']=='waiting'){ ?>
 <td> 
+<?php if($votter['status']=='waiting'){ ?>
     <a href="votters.php?action=approve&id=<?=$id?>" class='btn btn-approve'>approve</a>
     <a href="votters.php?action=reject&id=<?=$id?>" class='btn btn-reject'>Reject</a>
-</td>
+
 <?php
+}else{
+    ?>
+    <a href="votters.php?action=delete&id=<?=$id?>" class='btn btn-approve'>DELETE</a>
+    <a href="edite_votter.php?votter_id=<?=$id?>" class='btn btn-reject'>UPDATE</a>
+    <?php
 }
 ?>
+</td>
 </tr>
     <?php }?>
 </table>

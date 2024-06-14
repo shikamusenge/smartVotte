@@ -1,5 +1,14 @@
 <?php
+session_start();
 function renderHeader($title, $page, $user,$navs) {
+    if(!isset($_SESSION['USER_ROLE'])){
+        echo "<script>alert('Authentication Required !'); location.href='../'</script>";
+        exit;
+    }
+    if($_SESSION['USER_ROLE']!=$user){
+        echo "<script>alert('UnAuthrolized !'); location.href='../'</script>";
+        exit;
+    }
    ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -21,10 +30,9 @@ function renderHeader($title, $page, $user,$navs) {
                     }
             }?>
             <li><a href="../changePassword.php">change Password</a></li>
-            <li><a href="../logout.php" class='btn'>Logout</a></li>
+            <li><a href="../logout.php" class='btn' style="background-color:green; padding-block:0.3rem; color:white">Logout</a></li>
         </ul>
     </nav>
     <?php
 }
-
 ?>
