@@ -2,7 +2,7 @@
 session_start();
 function renderHeader($title, $page, $user,$navs) {
     if(!isset($_SESSION['USER_ROLE'])){
-        echo "<script>alert('Authentication Required !'); location.href='../'</script>";
+        echo "<script>alert('Authentication Required !'); location.href='../index.php'</script>";
         exit;
     }
     if($_SESSION['USER_ROLE']!=$user){
@@ -17,10 +17,11 @@ function renderHeader($title, $page, $user,$navs) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?= $title?></title>
         <link rel="stylesheet" href="../../src/assets/css/main.css">
+        
     </head>
     <body>
     <nav>
-        <div class='brand'><span style='color:green'>SMART</span> VOTE</div>
+       <div class="brand">SMART<span style="color: green">ONLINE</span>  VOTE</div>
         <ul>
             <?php foreach ($navs as $nav) {
                 if ($nav['text'] == $page) {

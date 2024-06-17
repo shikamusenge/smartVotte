@@ -5,7 +5,8 @@ session_start();
 require_once '../src/controller/userController.php';
 // If the user is already logged in, redirect to the dashboard
 if (isset($_SESSION['user_id'])) {
-    $address="Location:../public/".$_SESSION['USER_ROLE']."/";
+    $page=$_SESSION['USER_ROLE']=='admin'?'admins':'votter';
+    $address="Location:../public/".$page."/";
     header($address);
     exit;
 }

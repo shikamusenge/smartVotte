@@ -1,7 +1,5 @@
 <?php
-define('BASE_DIR', __DIR__ . '/../../src/');
-include_once BASE_DIR . 'layout/header.php';
-// include_once "../../src/layout/header.php";
+include_once "../../src/layout/header.php";
 include_once "../../src/controller/CandidateController.php";
 $title = "Candidates";
 $page = "candidates";

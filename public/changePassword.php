@@ -8,8 +8,7 @@ $newPass=$_POST['newPassword'];
 $User=new User();
 $res=$User->changePassword($userId,$newPass,$oldPass);
 if($res['success']){
-    echo "Success";
-    echo "<script>alert('password changed Successfully'); location.href='./';</script>";
+    echo "<script>alert('password changed Successfully'); location.href='index.php'</script>";
 }else{
        echo "<script>alert('provide valid old password');</script>";
 
@@ -30,7 +29,7 @@ if($res['success']){
 <div class="main-section">
     <div class="container-centered">
         <div class="form-container" style="width:400px; max-width:90vw;">
-            <form method="post">
+            <form method="post" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>
             <h2 class="form-header">RESET PASSWORD</h2>
             <div class="form-input">
                 <label for="oldPassword">Old Password</label>

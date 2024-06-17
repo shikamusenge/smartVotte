@@ -53,7 +53,7 @@ if($User->register($userInfo)){
         <?php include_once '../../src/layout/votterRegistrerForm.php'; ?>
         <?php include_once '../../src/layout/userForm.php'; ?>
          <div class="form-input">
-        <button type="submit" name="save_votter">Signup</button>
+        <button type="submit" id='save' name="save_votter">Signup</button>
     </div>
     </div>
 </form>
@@ -61,3 +61,46 @@ if($User->register($userInfo)){
 </section>
 </body>
 </html>
+<script>
+// Select elements
+const emailInput = document.querySelector('#email');
+const newPasswordInput = document.querySelector('#new_pass');
+const submitButton = document.querySelector('#save');
+const emailMessage = document.querySelector('#email_message');
+
+// Set API URL
+const apiUrl = 'verifyEmail.php';
+
+// Disable submit button by default
+submitButton.disabled = true;
+
+// Add event listener to email input
+emailInput.addEventListener('change', async () => {
+  const email = emailInput.value.trim(); // Trim whitespace from input value
+  // Create FormData object
+  const formData = new FormData();
+  formData.append('email', email);
+
+  try {
+    // Send request to API
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      body: formData
+    });
+
+    // Parse JSON response
+    const data = await response.json();
+    if (data.available) {
+      emailMessage.textContent = 'Email is valid';
+      submitButton.disabled = false;
+    } else {
+      emailMessage.textContent = 'Email is taken';
+      submitButton.disabled = true;
+    }
+  } catch (error) {
+    console.error('Error verifying email:', error);
+    emailMessage.textContent = 'Error verifying email';
+    submitButton.disabled = true;
+  }
+});
+</script>

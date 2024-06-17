@@ -58,6 +58,20 @@ $conn = $this->getConnection();
     error_log($e->getMessage());
     throw new Exception('Failed to insert user data', 500);
 }}
+public function emailExists($email) {
+    try {
+        $conn = $this->getConnection();
+        $query = "SELECT COUNT(*) AS total FROM users WHERE email = :email";
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR); // Use PDO::PARAM_STR for email
+        $stmt->execute();
+        $user = $stmt->fetch();
+
+        return $user['total'] > 0;
+    } catch (\Throwable $th) {
+        throw $th;
+    }
+}
 public function changePassword($userId,$newPassword,$oldPassword){
  try {
    $result=["success"=>false,"message"=>"Invalid password provided"];

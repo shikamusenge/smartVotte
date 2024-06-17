@@ -40,7 +40,7 @@ class PostController extends Database{
     public function getAllPosts() {
        try {
         $conn = $this->getConnection();
-        $stmt = $conn->prepare("SELECT * FROM posts") or die("failled to load data");
+        $stmt = $conn->prepare("SELECT `post_id`, `title`, `Description`, `date`, posts.`status` p_status,COUNT(candidate.candidate_id) total FROM `posts` LEFT JOIN candidate ON posts.post_id=candidate.post GROUP BY candidate.post, post_id") or die("failled to load data");
         $stmt->execute();
         $result=$stmt->fetchAll();
         if(!$result){

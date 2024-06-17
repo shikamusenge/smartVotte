@@ -1,7 +1,7 @@
 <?php
-include_once "../../src/layout/header.php";
-include_once "../../src/controller/postController.php";
-include_once "../../src/utils/Validator.php";
+require_once __DIR__ . '/../../src/layout/header.php';
+require_once __DIR__ . '/../../src/controller/postController.php';
+require_once __DIR__ . '/../../src/utils/Validator.php';
 
 $title="@Posts";
 $page="Posts";

@@ -3,29 +3,50 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Acount not Approved</title>
+    <title>Welcome</title>
     <style>
+      .contact-section {
+        background-color: #f4f4f4;
+        padding: 50px 20px;
+        text-align: center;
+      }
+      .contact-section h2 {
+        margin-bottom: 20px;
+        font-size: 2.5rem;
+        color: #333;
+      }
+      .contact-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 auto;
+        max-width: 600px;
+        text-align: left;
+      }
+      .contact-info p {
+        margin: 10px 0;
+        font-size: 1.2rem;
+        color: #555;
+      }
+      .contact-info a {
+        color: #1a73e8;
+        text-decoration: none;
+      }
+      .contact-info a:hover {
+        text-decoration: underline;
+      }
       body {
         font-family: "Arial", sans-serif;
         margin: 0;
         padding: 0;
         box-sizing: border-box;
       }
-      header {
-        background-color: #ffffff;
-        color: white;
-        padding: 1rem 0;
-      }
-      header .container {
+      nav {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        max-width: 1200px;
-        margin: auto;
-        padding: 0 1rem;
-      }
-      header h1 {
-        margin: 0;
+        padding: 1rem 2rem;
+        border-bottom: solid 2px rgb(4, 138, 24);
       }
       nav ul {
         list-style: none;
@@ -36,13 +57,21 @@
       nav ul li {
         margin-left: 2rem;
       }
-      nav ul li a {
-        color: black;
+      nav .brand {
+        font-weight: bolder;
+      }
+      nav ul a {
         text-decoration: none;
+        color: rgb(6, 67, 28);
+        padding: 0.5rem 1rem;
+      }
+      nav ul .active {
+        text-decoration: underline;
+      }
+      .main-section {
+        margin: 2rem;
       }
       .hero {
-        background: url("https://via.placeholder.com/1200x600") no-repeat center
-          center/cover;
         height: 600px;
         color: black;
         display: flex;
@@ -63,9 +92,9 @@
         margin-top: 1rem;
         padding: 1rem 2rem;
         background-color: green;
-        color: white;
         text-decoration: none;
         border-radius: 5px;
+        color: white;
       }
       footer {
         border-top: solid 1px rgb(8, 31, 2);
@@ -80,19 +109,17 @@
     </style>
   </head>
   <body>
-    <header>
-      <div class="container">
-        <h1>Accont Not Approved</h1>
-        <nav>
-          <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="./public/index.php">Login</a></li>
-            <li><a href="./public/votter/register.php">signup</a></li>
-            <li><a href="#contuct">Contact</a></li>
-          </ul>
-        </nav>
+    <nav>
+      <div class="brand">
+        SMART <span style="color: green">ONLINE</span> VOTE
       </div>
-    </header>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="./ndex.php">Login</a></li>
+        <li><a href="./votter/register.php">signup</a></li>
+        <li><a href="../index.php#contact">Contact</a></li>
+      </ul>
+    </nav>
 
     <section class="hero" id="home">
       <div>
@@ -100,7 +127,7 @@
         <p>
           Your account is not yet Approved contact admin to approve account.
         </p>
-        <a href="../index.php">Back to home</a>
+        <a href="../index.html">Back to home</a>
       </div>
     </section>
     <footer>

@@ -19,7 +19,7 @@ $posts = $postCtl->getAllPosts();
 
 if(isset($_GET['action'])){
     $id=$_GET['id'];
-    if($_GET['action']=='lounch'){
+    if($_GET['action']=='Launch'){
        if($postCtl->setPostReady($id)){
         echo"<script>alert('post is now in votting mode'); location.href='posts.php'</script>";
        } 
@@ -56,15 +56,15 @@ if(isset($_GET['action'])){
  foreach($posts as $post){
     $no++;
     $id=$post['post_id'];
-    $statusAction=$post['status']=='onhold'?"lounch":"close";
+    $statusAction=$post['p_status']=='onhold'?"Launch":"close";
     ?>
 <tr>
 <td><?=$no?></td>
 <td><?=$post['title']?></td>
 <td style='max-width:250px'><?=$post['Description']?></td>
-<td>0</td>
+<td><?=$post['total']?></td>
 <td><?=$post['date']?></td>
-<td><?=$post['status']?></td>
+<td><?=$post['p_status']?></td>
 <td> 
     <a href="posts.php?action=<?=$statusAction?>&id=<?=$id?>" class='btn btn-approve'><?=$statusAction?></a>
     <a href="edite_post.php?action=reject&id=<?=$id?>" class='btn btn-edit'>edit</a>
